@@ -10,6 +10,17 @@ async function getAllSongs(){
     }
 }
 
+async function getOneSong(id){
+    try{
+        let result = await db.any("SELECT * FROM songs WHERE id = $1", [id]);
+        return result;
+    }
+    catch(error){
+        return error;
+    }
+}
+
 module.exports = {
-    getAllSongs
+    getAllSongs,
+    getOneSong
 }

@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllSongs } = require('../queries/songQueries')
+const { getAllSongs, getOneSong } = require('../queries/songQueries')
 
 //ROUTES
 
@@ -17,7 +17,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
 
+    let result = await getOneSong(id);
+
+    if(result.length === 0){
+        res.send("Could not find the song you were looking for");
+    }
+    else{
+        res.send(...result);
+    }
+
+})
 
 
 
