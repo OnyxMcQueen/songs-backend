@@ -2,7 +2,7 @@ const db = require('../db/dbConfig');
 
 async function getAllSongs(){
     try{
-        const allSongs = db.any("SELECT * FROM songs");
+        const allSongs = db.any("SELECT * FROM songs ORDER BY id ASC");
         return allSongs;
     }
     catch(error){
@@ -22,7 +22,7 @@ async function getOneSong(id){
 
 async function createSong(data){
     try{
-        const newSong = await db.one(`INSERT INTO songs (song_name, artist, album, song_time, is_favorite) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [data.song_name, data.artist, data.album, data.song_time, data.is_favorite]);
+        const newSong = await db.one(`INSERT INTO songs (song_name, artist, album, song_time, is_favorite, song_image) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [data.song_name, data.artist, data.album, data.song_time, data.is_favorite, data.song_image]);
         return newSong;
     }
     catch(error){

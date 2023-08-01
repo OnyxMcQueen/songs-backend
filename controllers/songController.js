@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
         res.send("Could not find the song you were looking for");
     }
     else{
-        res.send(...result);
+        res.send(result[0]);
     }
 
 })
